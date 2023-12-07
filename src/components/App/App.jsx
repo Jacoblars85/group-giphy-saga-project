@@ -16,7 +16,6 @@ function App() {
       <Link to='/favorites'>
       <button>Favorites</button>
       </Link>
-    
      <Route exact path='/'>
       <SearchBar />
       </Route>
