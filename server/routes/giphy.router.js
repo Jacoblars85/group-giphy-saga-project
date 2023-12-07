@@ -7,6 +7,7 @@ const API_KEY = process.env.GIPHY_API_KEY;
 const router = express.Router();
 
 router.get("/:id", (req, res) => {
+  
   axios({
     method: "GET",
     url: `https://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&&q=${req.params.id}`,
