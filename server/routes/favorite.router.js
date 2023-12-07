@@ -42,10 +42,10 @@ router.put("/:id", (req, res) => {
   // req.body should contain a category_id to add to this favorite image
   const sqlText = `
   UPDATE "favorites"
-    "category_id" = $1
+    SET "category_id" = $1
     WHERE "id" = '${req.params.id}';`;
 
-  const sqlValues = req.body.category_id;
+  const sqlValues = [req.body.category_id];
   pool
     .query(sqlText, sqlValues)
     .then((result) => {
