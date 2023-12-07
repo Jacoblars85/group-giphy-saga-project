@@ -25,10 +25,10 @@ router.post("/", (req, res) => {
   ("url")
   VALUES
   ($1)`;
-  const sqlValues = newFavoritedPost.newFavorite;
+  const sqlValues = [req.body.newFavorite];
   pool
     .query(sqlText, sqlValues)
-    .then((res) => {
+    .then((result) => {
       res.sendStatus(201);
     })
     .catch((err) => {
@@ -48,7 +48,7 @@ router.put("/:id", (req, res) => {
   const sqlValues = req.body.category_id;
   pool
     .query(sqlText, sqlValues)
-    .then((res) => {
+    .then((result) => {
       res.sendStatus(201);
     })
     .catch((err) => {
@@ -64,7 +64,7 @@ router.delete("/:id", (req, res) => {
       WHERE "id" = ${req.params.id};`;
   pool
     .query(sqlText)
-    .then((res) => {
+    .then((result) => {
       res.sendStatus(201);
     })
     .catch((err) => {

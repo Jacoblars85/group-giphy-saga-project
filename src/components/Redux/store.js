@@ -8,6 +8,7 @@ import { takeLatest, put } from 'redux-saga/effects';
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeLatest('SAGA/GET_GIFFY', getGiffy)
+    yield takeLatest('SAGA/ADD_FAVORITE', postNewFav)
 }
 
 // Create sagaMiddleware
@@ -39,6 +40,20 @@ function* getGiffy(action) {
     }
 }
 
+function* postNewFav(action) {
+    try {
+        const response = yield axios({
+            method: 'POST',
+            url: '/api/favorites',
+            data: {
+                newFavorite: action.payload,
+                
+            }
+        })
+    } catch (error) {
+        console.log('Unable to post giphy to server:', error)
+    }
+}
 
 
 
