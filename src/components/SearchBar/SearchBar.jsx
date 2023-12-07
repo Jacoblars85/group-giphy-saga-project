@@ -7,7 +7,7 @@ function SearchBar() {
     let [searchInput, setSearchInput] = useState('')
 
     const giffyReducer = useSelector(store => store.giffyReducer);
-
+    
     const dispatch = useDispatch()
 
     // useEffect(() => {
