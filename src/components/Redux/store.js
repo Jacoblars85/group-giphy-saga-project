@@ -9,6 +9,7 @@ import { takeLatest, put } from 'redux-saga/effects';
 function* rootSaga() {
     yield takeLatest('SAGA/GET_GIFFY', getGiffy)
     yield takeLatest('SAGA/ADD_FAVORITE', postNewFav)
+    yield takeLatest('SAGA/SET_FAVORITES', getFavorites)
 }
 
 // Create sagaMiddleware
@@ -17,6 +18,15 @@ const sagaMiddleware = createSagaMiddleware();
 const giffyReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_GIFFY':
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
+const setFavorites = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_FAVS':
             return action.payload;
         default:
             return state;
@@ -55,6 +65,20 @@ function* postNewFav(action) {
     }
 }
 
+function* getFavorites() {
+    try {
+        const response = yield axios({
+            method: 'GET',
+            url: '/api/favorites'
+        })
+        yield put({
+            type: 'SET_FAVS',
+            payload: response.data
+        })
+    } catch (error) {
+        console.log('Unable to get our favorite giphs:', error)
+    }
+}
 
 
 
@@ -67,6 +91,7 @@ function* postNewFav(action) {
 const store = createStore(
     combineReducers({
         giffyReducer,
+        setFavorites
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),

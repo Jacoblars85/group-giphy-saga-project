@@ -1,5 +1,6 @@
 import SearchBar from "../SearchBar/SearchBar";
 import Favorites from "../Favorites/Favorites";
+
 import { HashRouter as Router, Route, Link } from 'react-router-dom';
 
 
