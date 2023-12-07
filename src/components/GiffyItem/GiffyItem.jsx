@@ -3,23 +3,24 @@ import { useDispatch } from 'react-redux';
 
 function GiffyItem({ giffy }) {
     console.log(giffy)
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
-    // const removeItem = () => {
-    //     dispatch({
-    //         type: 'SAGA/DELETE_BASKET',
-    //         payload: basketItem.id
-    //     })
-       
-        
-    // }
+   
+    const addFavorite =() => {
+        dispatch({
+            type: 'SAGA/ADD_FAVORITE',
+            payload: giffy.images.fixed_height.url
+        })
+    }
+    
 
     return (
         <li>
             <img src={giffy.images.fixed_height.url} />
 
 
-            {/* <button onClick={removeItem}>Remove</button> */}
+
+            <button onClick={addFavorite}>Add To Favorites</button>
         </li>
     )
 }
