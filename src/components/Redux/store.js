@@ -10,6 +10,7 @@ function* rootSaga() {
     yield takeLatest('SAGA/GET_GIFFY', getGiffy)
     yield takeLatest('SAGA/ADD_FAVORITE', postNewFav)
     yield takeLatest('SAGA/SET_FAVORITES', getFavorites)
+    yield takeLatest('SAGA/UPDATE_FAVORITES', setFavCategory)
 }
 
 // Create sagaMiddleware
@@ -62,6 +63,25 @@ function* postNewFav(action) {
         })
     } catch (error) {
         console.log('Unable to post giphy to server:', error)
+    }
+}
+
+//generator function to handle setting a favorites category
+function* setFavCategory(action) {
+    try {
+       
+        const response = yield axios({
+            method: 'PUT',
+            url: `/api/favorites/${action.payload.gifID}`,
+            data: {category_id: action.payload.gifNAME}
+        })
+
+        yield put({
+            type: 'SAGA/SET_FAVORITES',
+
+        })
+    } catch (error) {
+        console.log('Unable to update giffy fav category from server', error);
     }
 }
 
