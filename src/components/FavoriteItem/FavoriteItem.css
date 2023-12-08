@@ -1,0 +1,11 @@
+.favorites{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 10px;    
+}
+
+.card {
+    display: flex;
+    flex-wrap: column;
+}

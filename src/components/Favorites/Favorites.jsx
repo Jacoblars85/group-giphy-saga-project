@@ -24,11 +24,13 @@ function Favorites() {
     return (
       <div>
         <h2>Favorites</h2>
-        {setFavorites.map((giffy) => {
-                return (
-                    <FavoriteItem key={giffy.id} giffy={giffy} />
-                );
+        <div className="favorites">
+            {setFavorites.map((giffy) => {
+                    return (
+                        <FavoriteItem key={giffy.id} giffy={giffy} />
+                    );
             })}
+        </div>
       </div>
     );
   }
