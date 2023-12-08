@@ -18,7 +18,9 @@ function FavoriteItem ({giffy}) {
 
     return (
         <>
+        <h1>{giffy.category_name}</h1>
         <img src={giffy.url} />
+        <br></br>
         <select onChange={() => setCategory(event.target.value)}>
             <option value="1">wild</option>
             <option value="2">uproarious</option>
