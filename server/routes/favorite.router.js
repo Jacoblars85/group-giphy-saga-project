@@ -5,7 +5,15 @@ const router = express.Router();
 
 // return all favorite images
 router.get("/", (req, res) => {
-  const sqlText = `SELECT * FROM "favorites"`;
+  const sqlText = `
+SELECT 
+	"favorites"."id",
+	"favorites"."url",
+	"categories"."name" as "category_name"
+FROM "favorites"
+	LEFT JOIN "categories"
+	on "favorites"."category_id" = "categories"."id"
+ORDER BY "favorites"."category_id" DESC;`;
   pool
     .query(sqlText)
     .then((result) => {
